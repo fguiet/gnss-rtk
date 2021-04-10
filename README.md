@@ -81,6 +81,18 @@ You should see incomming RTCM messages
 
 ![alt text](images/ntrip_messages.jpg)
 
+5. Go outside in a clear open sky space
+
+After a few minutes, you'll see in the Data View the fix mode going to `3D/GNSS/FIXED`
+
+![alt text](images/rtk-fixed.jpg)
+
+Check the accuray, in `ucenter` : View, Messages View, UBX-NAV (Navigation)-HPPOSECEF (High Precision Position ECEF)
+
+![alt text](images/rtk-accuracy.jpg)
+
+Bingo ! with the method you can easely check whether your `simplertk2b` board is operational.
+
 ## Configuring an RTK base
 
 In this configuration, you'll need :
