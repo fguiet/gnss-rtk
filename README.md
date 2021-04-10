@@ -24,6 +24,9 @@ Below the board I am using : <https://www.ardusimple.com/simplertk2b/>
 
 ![alt text](images/simplertk2b.jpg)
 
+This board is using the ZED-F9P u-blox chip, see Integration Manual : <https://www.u-blox.com/sites/default/files/ZED-F9P_IntegrationManual_%28UBX-18010802%29.pdf>
+
+
 ## Getting a RTK FIX
 
 An easy way to get an RTK FIX is to use an existing NTRIP Caster.
@@ -127,11 +130,31 @@ Change the default baudrate for `UART1` and `UART2` to 115200 bauds :
 
 Don't forget to click the `send` button and to save this configuration permanently (Configuration View, CFG (configuration), Save current configuration, send button)
 
-3. Activating the determination
+3. Configuring the board
 
 * In `ucenter` : View, Messages View, UBX-NAV (Navigation)-PVT (Navigation PVT Solution)
 
+* Estimation of the base position. In `ucenter` : View, Messages View, UBX-CFG (Config)-TMODE3 (Time Mode 3)
 
+Choose either : `1-Survey-in` or `Fixed-Mode` and fill in the form depending on your choice.
+
+![alt text](images/tmode3.jpg)
+
+Wait for a few minute and the receiver begins operation in timemode and can output a base position message if configured.
+
+![alt text](images/rtk-time-mode.jpg)
+
+The survey-in status can be queried using the UBX-NAV-SVIN message.
+
+![alt text](images/survey-in-status.jpg)
+
+Now you want the base station to output RTCM messages
+
+* In `ucenter` : View, Messages View, UBX-CFG (Config) - MSG (Messages)
+
+Enable all RTCM3.3 messages you want on the desired UART port.
+
+![alt text](images/enable-rtcm3-msg.jpg)
 
 Don't forget to click the `send` button and to save this configuration permanently (Configuration View, CFG (configuration), Save current configuration, send button)
 
@@ -151,9 +174,9 @@ The RTK Led on the `simplertk2b` board should start blinking (that means RTCM fr
 
 ![alt text](images/data_view.jpg)
 
+Your RTK Base is ready !
+
 You can go to `ucenter` : View, Messages View, UBX-NAV (Navigation)-HPPOSECEF (High Precision Position ECEF) to view the estimated accuracy
-
-
 
 ### Build the RTK base
 
