@@ -127,7 +127,13 @@ Change the default baudrate for `UART1` and `UART2` to 115200 bauds :
 
 Don't forget to click the `send` button and to save this configuration permanently (Configuration View, CFG (configuration), Save current configuration, send button)
 
+3. Activating the determination
 
+* In `ucenter` : View, Messages View, UBX-NAV (Navigation)-PVT (Navigation PVT Solution)
+
+
+
+Don't forget to click the `send` button and to save this configuration permanently (Configuration View, CFG (configuration), Save current configuration, send button)
 
 ## Join the French GNSS RTK Project : `centipede`
 
