@@ -240,7 +240,7 @@ In `ucenter` : View, Messages View, UBX-RXM (Receiver Manager)-RTCM (RTCM input 
 
 You should see incomming RTCM messages
 
-![alt text](images/ntrip_messages.jpg)
+systemctl status
 
 ## Bill Of Material (BOM)
 
