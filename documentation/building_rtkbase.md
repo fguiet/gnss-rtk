@@ -11,6 +11,14 @@ Use this tutorial to configure and burn a ready config Raspberry image : <https:
 docker run --rm --privileged -v /dev:/dev -v /applications/mkaczanowski/packer-builder-arm:/build -v /applications/homelab/packer/packer-raspberry:/applications/homelab/packer/packer-raspberry -v /applications/raspios:/applications/raspios packer-builder-arm:20210418 build /applications/homelab/packer/packer-raspberry/raspios-lite-arm64.json
 ```
 
+## Bill Of Material (BOM)
+
+* Raspberry 4 (2 giga of RAM) - RaspiOS 64 bits Lite
+* SimpleRTK2B-F9P 
+  * [SimpleRTK2B-F9P](https://www.ardusimple.com/product/simplertk2b-f9p-v3/)
+  * [ZED-F9P module](https://www.u-blox.com/en/product/zed-f9p-module)
+* [DA910 multi-band GNSS Antenna](https://store-drotek.com/910-da-910-multiband-gnss-antenna.html)
+
 ## Installation
 
 Most of what is described below are taken from : <https://github.com/Stefal/rtkbase>
@@ -200,9 +208,26 @@ Navigate to <http://your-raspberry-ip> (default password : `admin`)
 
 ![alt text](images/rtkbase.jpg)
 
+## Compute accurate base position
+
+Follow tutorial here : <https://docs.centipede.fr/docs/base/positionnement.html>
+
+Creating a RINEX file
+
+![alt text](images/rinex.jpg)
+
+Go the IGN web site : <http://rgp.ign.fr/SERVICES/calcul_online.php> and fill in the form to get the accuracy computation.
+
+![alt text](images/pivot-compute.jpg)
+
+Time to set the accurate position of your base : see : <https://docs.centipede.fr/docs/base/param_positionnement>
+
+
+
 ## References
 
 * Real-Time Kinematic Satellite Navigation : <https://www.petig.eu/rtk/>
+
 
 
 Check RTCM frame transmission   
