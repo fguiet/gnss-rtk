@@ -17,7 +17,7 @@ docker run --rm --privileged -v /dev:/dev -v /applications/mkaczanowski/packer-b
 * SimpleRTK2B-F9P 
   * [SimpleRTK2B-F9P](https://www.ardusimple.com/product/simplertk2b-f9p-v3/)
   * [ZED-F9P module](https://www.u-blox.com/en/product/zed-f9p-module)
-* [DA910 multi-band GNSS Antenna](https://store-drotek.com/910-da-910-multiband-gnss-antenna.html)
+  * [DA910 multi-band GNSS Antenna](https://store-drotek.com/910-da-910-multiband-gnss-antenna.html)
 
 ## Installation
 
@@ -221,8 +221,6 @@ Go the IGN web site : <http://rgp.ign.fr/SERVICES/calcul_online.php> and fill in
 ![alt text](images/pivot-compute.jpg)
 
 Time to set the accurate position of your base : see : <https://docs.centipede.fr/docs/base/param_positionnement>
-
-
 
 ## References
 
