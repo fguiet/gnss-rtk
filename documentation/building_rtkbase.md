@@ -19,6 +19,18 @@ docker run --rm --privileged -v /dev:/dev -v /applications/mkaczanowski/packer-b
   * [ZED-F9P module](https://www.u-blox.com/en/product/zed-f9p-module)
   * [DA910 multi-band GNSS Antenna](https://store-drotek.com/910-da-910-multiband-gnss-antenna.html)
 
+## Setting up the SimpleRTK2B-F9P
+
+* Flash the SimpleRTK2B-F9P with the last firmware (See [README.md](../README.md))
+
+* Plug in your SimpleRTK2B-FT9 on your Raspberry
+
+* Install the RTK base sotfware (see below)
+
+  * See Point 8 below it will configure some stuff for us 
+
+* Nothing more should be configured...
+
 ## Installation
 
 Most of what is described below are taken from : <https://github.com/Stefal/rtkbase>

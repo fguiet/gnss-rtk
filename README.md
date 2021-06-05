@@ -137,7 +137,7 @@ Don't forget to click the `send` button and to save this configuration permanent
 
 3. Configuring the board
 
-* In `ucenter` : View, Messages View, UBX-NAV (Navigation)-PVT (Navigation PVT Solution)
+* In `ucenter` : View, Messages View, Enable UBX-NAV (Navigation)-PVT (Navigation PVT Solution)
 
 * Estimation of the base position. In `ucenter` : View, Messages View, UBX-CFG (Config)-TMODE3 (Time Mode 3)
 
