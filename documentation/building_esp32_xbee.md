@@ -30,9 +30,9 @@ You can access a log page by navigating to :  <http://192.168.1.137/log.html>
 
 * Connect the ESP32 to the ArduSimple board (using XBee footprint)
 
-3.3V ESP32 pin to 3.3V ArduSimple pin (XBee footprint)
-GROUND ESP32 pin to 3.3V ArduSimple pin (XBee footprint)
-RXD ESP32 Pin to TXD ArduSimple pin (XBee footprint)...Don't ask me why it is like that...
+* 3.3V ESP32 pin to 3.3V ArduSimple pin (XBee footprint)
+* GROUND ESP32 pin to 3.3V ArduSimple pin (XBee footprint)
+* RXD ESP32 Pin to TXD ArduSimple pin (XBee footprint)...Don't ask me why it is like that...
 
 * See how to configure the [ArduSimple Rover here](../README.md)
 

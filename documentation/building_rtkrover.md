@@ -13,13 +13,17 @@ In order to build an RTK Rover you need :
 
 * Configure the simplertk2b board (See [building ESP32 XBEE](building_esp32_xbee.md) and [README](../README.md)
 
-If everything's ok, you should see the `GPS Fix` led blinking, `NO TRK` led OFF, `XBEE>GPS` blinking (ie RTCM message are received)
+If everything's ok, you should see the `GPS Fix` led blinking, `NO RTK` led OFF, `XBEE>GPS` blinking (ie RTCM message are received)
 
 ## Arduino connexion
 
-* Configure the `UART1` or `UART2` port to output NMEA messages.
+### Easy go !
 
-* Connect the PIN 8 (default AltSerial RX pin) to `<TX1` (UART1) or `<TX2` (UART2)
+* Configure the `UART1` port to output NMEA messages.
+
+* Connect the PIN 8 (default AltSerial RX pin) to `<TX1` (UART1) 
+
+* !! IOREF should be connected to 5V !!!
 
 * Upload the following sketch, you should see your latitude and longitude on the Serial monitor
 
@@ -66,14 +70,68 @@ void loop()
 }
 ```
 
+Serial reception can be tested thank to this code below:
+
+```c++
+#include <AltSoftSerial.h>
+
+AltSoftSerial altSerial;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("AltSoftSerial Test Begin");
+  altSerial.begin(9600);
+  altSerial.println("Hello World");
+}
+
+void loop() {
+  char c;
+
+  if (Serial.available()) {
+    c = Serial.read();
+    altSerial.print(c);
+  }
+  if (altSerial.available()) {
+    c = altSerial.read();
+    Serial.print(c);
+  }
+}
+```
 
 NMEA Enabled High precision may be needed, see <https://learn.sparkfun.com/tutorials/setting-up-a-rover-base-rtk-system/all>
 
 Arduino Library to decode NMEA message
 
-
 Active only some message to the output
 https://wiki.ardumower.de/index.php?title=Ardumower_Sunray#Rover_configuration_.28messages.29
+
+### Using the SparkFun library
+
+This library is quite useful : <https://github.com/sparkfun/SparkFun_u-blox_GNSS_Arduino_Library>
+
+* Connect the PIN 8 to `<TX1` (UART1) 
+
+* Connect the PIN 9 to `>RX1` (UART1) 
+
+* !! IOREF should be connected to 5V !!!
+
+* Configure the `UART1` port as follow
+
+![alt text](images/rtk_rover_spark_fun_conf.jpg)
+
+* Use the example `Example12_UseUart`
+
+![alt text](images/sparkfun_example_uart.jpg)
+
+It's better to use `AltSoftSerial` library so change example code as follow:
+
+```c++
+#include <AltSoftSerial.h>
+AltSoftSerial mySerial(8,9);
+
+/*#include <SoftwareSerial.h>
+SoftwareSerial mySerial(8, 9); // RX, TX. Pin 10 on Uno goes to TX pin on GNSS module.*/
+```
 
 ## References
 
