@@ -109,9 +109,9 @@ https://wiki.ardumower.de/index.php?title=Ardumower_Sunray#Rover_configuration_.
 
 This library is quite useful : <https://github.com/sparkfun/SparkFun_u-blox_GNSS_Arduino_Library>
 
-* Connect the PIN 8 to `<TX1` (UART1) 
+* Connect the PIN 8 (Arduino) to `<TX1` (simplertk2b - UART1) 
 
-* Connect the PIN 9 to `>RX1` (UART1) 
+* Connect the PIN 9 (Arduino) to `>RX1` (simplertk2b - UART1) 
 
 * !! IOREF should be connected to 5V !!!
 
@@ -125,9 +125,11 @@ This library is quite useful : <https://github.com/sparkfun/SparkFun_u-blox_GNSS
 
 It's better to use `AltSoftSerial` library so change example code as follow:
 
+**CAUTION** AltSoftSerial only work with pin 8 and 9 on Arduino UNO (See [PROS and CONS](ttps://1sheeld.com/arduinos-softwareserial-vs-altsoftserial-library-use-1sheeld/?__cf_chl_jschl_tk__=5bcafe10cee701f136471bc3767d4421fb09d72c-1625323457-0-AQnXpMTNY-csa8jg1Wy-llooO7mhCHrCx4zOOBY3HIEv2Y0tswZlqKn2hVPX6nRHsGF-qtjcwd2pp-YlFal--LJUeb4sNnTyUa5o7_WfKjVyllv3RbFJCl94KDzlX3qqkv4Bgw7prJiEo1Qdf6XRHrlU7d1n9WpqQb73Cg73s94cvn6hBaPkHilBRJxB7CbmTnDXdpHbD-GplFiuF_d-Mt6jCWJLVEp9ANnQ1xupA5wBB2KEjD86LgXOjtm-5Kn73bQjxGUHrHKfdmdCHYouMYv0TfiWMgLE-og-5Fv7vb16dbaaseTJiBlBjpSxkkY0KuVsQ7rjS_kGoHq8QHczefQo31-I2PAivhVEl5qE39IrgEOMOPBalV4RkWa5kVo54S5wn5xmv72ubjDRycNO9YW1u4K9rjmLRBa-BGd09lqW1AxyQPoQQsTfEKt1FB1hMjnLOzCon0tQdTXs7Y4rvCzOMJ5F7lRSw1jQtfqLBFuz))
+
 ```c++
 #include <AltSoftSerial.h>
-AltSoftSerial mySerial(8,9);
+AltSoftSerial mySerial;
 
 /*#include <SoftwareSerial.h>
 SoftwareSerial mySerial(8, 9); // RX, TX. Pin 10 on Uno goes to TX pin on GNSS module.*/
