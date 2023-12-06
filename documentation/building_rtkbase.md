@@ -38,14 +38,13 @@ Most of what is described below are taken from : <https://github.com/Stefal/rtkb
 1. Get the source code from GitHub
 
 As of 2021/04/30, I am using the [release 2.2.0](https://github.com/Stefal/rtkbase/releases/tag/2.2.0)
+As of 2023/12/06, I am using the [release 2.4.2](https://github.com/Stefal/rtkbase/releases/tag/2.4.2)
 
 ```bash
 cd /applications
-git clone https://github.com/Stefal/rtkbase.git
-
-#Checkout tag 2.2.0
-cd rtkbase
-git checkout 2.2.0 -b 2.2.0
+wget https://github.com/Stefal/rtkbase/releases/download/2.4.2/rtkbase.tar.gz
+tar xvf rtkbase.tar.gz
+rm rtkbase.tar.gz
 ```
 
 2. Install Dependencies
@@ -65,11 +64,44 @@ cd /applications/rtkbase/tools
 sudo ./install.sh --rtklib
 ```
 
-4. Install the rtkbase web frontend
+3.1 Installation de Pyenv pour gérer plusieurs versions de Python pour l'utilisateur root
 
 ```bash
-cd /applications/rtkbase/tools
-sudo ./install.sh --rtkbase-release
+sudo apt-get update
+sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git
+
+# on passe sous root
+sudo su -
+
+# Install pyenv
+curl https://pyenv.run | bash
+
+# Add the following to .bashrc
+# Pyenv Conf
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Activation
+. ~/.bashrc
+
+# Installation de la version 3.10.13
+pyenv install 3.10.13
+
+# Create a virtual env for version 3.10.13 of Python
+pyenv virtualenv 3.10.13 rtkbase_python_3_10_13
+```
+
+4. Install the rtkbase web frontend
+
+As of 2023 - Do not do this step
+
+```bash
+#cd /applications/rtkbase/tools
+#sudo ./install.sh --rtkbase-release
 
 # This command will download the release from this branch (see rtkbase.tar.gz)
 # https://github.com/Stefal/rtkbase/releases/tag/2.2.0
@@ -82,14 +114,25 @@ sudo ./install.sh --rtkbase-release
 5. Install Rtkbase web front requirements
 
 ```bash
+# Activate virtualenv
+pyenv activate rtkbase_python_3_10_13
+
+# Install requirements for rtkbase
 cd /applications/rtkbase/tools
 python3 -m pip install --upgrade pip setuptools wheel  --extra-index-url https://www.piwheels.org/simple
 python3 -m pip install -r ../web_app/requirements.txt  --extra-index-url https://www.piwheels.org/simple
+
+pyenv deactivate 
 ```
 
 6. Install systemd services
 
 ```bash
+# Ajouter rtkbase_path=/applications/rtkbase dans /etc/environment
+
+export rtkbase_path=/applications/rtkbase
+echo $rtkbase_path
+
 cd /applications/rtkbase/tools
 sudo ./install.sh --unit-files
 
@@ -104,6 +147,11 @@ sudo ./install.sh --unit-files
 #/etc/systemd/system/rtkbase_web.service
 #/etc/systemd/system/rtkbase_archive.timer
 #/etc/systemd/system/rtkbase_archive.service
+
+#Dans rtkbase_web.service, Mettre (pour lancer avec le bon environnement python)
+
+#ExecStart=~/.pyenv/versions/rtkbase_python_3_10_13/bin/python /applications/rtkbase/web_app/server.py
+
 ```
 
 ```bash
