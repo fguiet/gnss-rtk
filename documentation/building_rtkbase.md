@@ -31,6 +31,64 @@ docker run --rm --privileged -v /dev:/dev -v /applications/mkaczanowski/packer-b
 
 * Nothing more should be configured...
 
+## Installation - The easy way
+
+1. Installation de Pyenv 
+
+Installation de Pyenv pour gérer plusieurs versions de Python pour l'utilisateur root
+
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git
+
+# on passe sous root
+sudo su -
+
+cd /applications
+
+# Install pyenv
+curl https://pyenv.run | bash
+
+# Add the following to .bashrc
+# Pyenv Conf
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Activation
+. ~/.bashrc
+
+# Installation de la version 3.10.13
+pyenv install 3.10.13
+
+# Create a virtual env for version 3.10.13 of Python
+pyenv virtualenv 3.10.13 rtkbase_python_3_10_13
+```
+
+2. Installation de rtkbase
+
+```bash
+cd /applications
+
+wget https://raw.githubusercontent.com/Stefal/rtkbase/master/tools/install.sh -O install.sh
+chmod +x install.sh
+sudo ./install.sh --all release
+
+#Ajouter ca en début de fichier install.sh pour activier python dans la bonne version
+#. ~/.bashrc
+#pyenv activate rtkbase_python_3_10_13
+
+#Dans /etc/systemd/system/rtkbase_web.service, Mettre (pour lancer avec le bon environnement python)
+
+#ExecStart=/root/.pyenv/versions/rtkbase_python_3_10_13/bin/python /applications/rtkbase/web_app/server.py
+
+systemctl daemon-reload
+systemctl restart rtkbase_web.service
+```
+
 ## Installation
 
 Most of what is described below are taken from : <https://github.com/Stefal/rtkbase>
@@ -114,6 +172,9 @@ As of 2023 - Do not do this step
 5. Install Rtkbase web front requirements
 
 ```bash
+# The following /etc/environment file will be modified with the frond end path
+# rtkbase_path=/applications/rtkbase/tools/rtkbase
+
 # Activate virtualenv
 pyenv activate rtkbase_python_3_10_13
 
@@ -150,7 +211,7 @@ sudo ./install.sh --unit-files
 
 #Dans rtkbase_web.service, Mettre (pour lancer avec le bon environnement python)
 
-#ExecStart=~/.pyenv/versions/rtkbase_python_3_10_13/bin/python /applications/rtkbase/web_app/server.py
+#ExecStart=/root/.pyenv/versions/rtkbase_python_3_10_13/bin/python /applications/rtkbase/web_app/server.py
 
 ```
 
@@ -226,7 +287,10 @@ sudo ./install.sh --detect-usb-gnss
 #/dev/ttyACM0  -  u-blox_AG_-_www.u-blox.com_u-blox_GNSS_receiver
 
 # Configure the ZED-F9P
-sudo ./install.sh --detect-usb-gnss --configure-gnss
+pyenv activate rtkbase_python_3_10_13
+sudo su - 
+./install.sh --detect-usb-gnss --configure-gnss
+pyenv deactivate
 ```
 
 To connect to your ZED-F9P from a remote comuter with `u-center`
