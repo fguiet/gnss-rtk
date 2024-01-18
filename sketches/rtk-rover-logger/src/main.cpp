@@ -10,7 +10,7 @@
 *  
 *  - ESP32 Wemos D1 Mini Pinout : https://github.com/r0oland/ESP32_mini_KiCad_Library
 *  - Reading SD Card with ESP32 : https://randomnerdtutorials.com/esp32-microsd-card-arduino/
-*  - SprkFun u-blox Arduino Library : http://librarymanager/All#SparkFun_u-blox_GNSS
+*  - SparkFun u-blox Arduino Library : http://librarymanager/All#SparkFun_u-blox_GNSS
 *
 *
 * Frédéric Guiet - 07/2021
@@ -175,7 +175,7 @@ void displaySimpleCenteredMessage(String msg) {
 }
 
 //Expose Hardware Serial to pin 16 & 17
-HardwareSerial hardwareSerial1(1);
+HardwareSerial hardwareSerial(1);
 #define SERIAL1_RX_PIN 16
 #define SERIAL1_TX_PIN 17
 
