@@ -251,6 +251,8 @@ systemctl status
 
 ## References
 
+* Article sur la génèse du projet : <https://cartocite.fr/centipedertk-ou-la-naissance-dun-geocommun/>
+
 * simpleRTK2B Configuration files : <https://www.ardusimple.com/configuration-files/>
 
 * simpleRTK2B Update and check firmware : <https://www.ardusimple.com/zed-f9p-firmware-update-with-simplertk2b/>

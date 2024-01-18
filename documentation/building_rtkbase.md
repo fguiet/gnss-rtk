@@ -179,8 +179,6 @@ systemctl status rtkbase_archive.service
 ```bash
 cd /applications/rtkbase/tools
 sudo ./install.sh --gpsd-chrony
-#Launch this one again, otherwise `/etc/chrony/chrony.conf` not correctly set
-sudo ./install.sh --gpsd-chrony
 
 # Check `/etc/chrony/chrony.conf`, the line below should be added
 # refclock SHM 0 refid GPS precision 1e-1 offset 0.2 delay 0.2
